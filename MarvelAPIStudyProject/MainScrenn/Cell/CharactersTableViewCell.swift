@@ -57,7 +57,7 @@ class CharactersTableViewCell: UITableViewCell {
             charLabelView.centerYAnchor.constraint(equalTo: centerYAnchor),
             charLabelView.leadingAnchor.constraint(equalTo: charImageView.trailingAnchor, constant: 20),
             charLabelView.heightAnchor.constraint(equalTo: heightAnchor),
-            charLabelView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12)
+            charLabelView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
         ]
         
         NSLayoutConstraint.activate(constraint)
