@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - ReturnApi
-struct ReturnApi: Codable {
+struct ReturnApi: Decodable {
     let copyright, attributionText: String
     let code : Int
     let attributionHTML: String
@@ -17,35 +17,28 @@ struct ReturnApi: Codable {
 }
 
 // MARK: - DataClass
-struct DataClass: Codable {
+struct DataClass: Decodable {
     let offset, limit, total, count: Int
     let results: [Result]
 }
 
 // MARK: - Result
-struct Result: Codable {
-   let id: Int
-   let modified, name, resourceURI, description: String
-   let thumbnail: Thumbnail
-   
-   enum CodingKeys: String, CodingKey{
-       case id
-       case modified, name, resourceURI, thumbnail, description
+struct Result: Decodable {
+    let id: Int
+    let modified, name, resourceURI, description: String
+    let thumbnail: Thumbnail
+    
+    enum CodingKeys: String, CodingKey{
+        case id
+        case modified, name, resourceURI, thumbnail, description
+    }
 }
 
-
-// MARK: -Heros
-struct Heros: Codable{
-
-   }
-}
-
-struct Thumbnail: Codable {
+struct Thumbnail: Decodable {
    let path: String
-   let xtension = "extension"
     
    enum CodingKeys: String, CodingKey{
-       case xtension, path
+       case path
    }
-   
 }
+

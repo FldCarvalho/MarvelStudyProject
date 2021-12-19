@@ -11,6 +11,7 @@ class ViewController: UIViewController {
 
     let mainView = CharactersView()
     let mainService = APIService()
+    private var dataSource = [Result]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,11 +20,12 @@ class ViewController: UIViewController {
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
         
-        mainService.marvelApiCall(using: {
+        mainService.marvelApiCall { (data) in
             DispatchQueue.main.async {
+                self.dataSource = data
                 self.mainView.tableView.reloadData()
             }
-            })
+        }
         
     }
     
@@ -36,37 +38,15 @@ class ViewController: UIViewController {
 
 extension ViewController:  UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mainService.characters.count
+        return dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = mainView.tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! CharactersTableViewCell
-        cell.charLabelView.text = mainService.characters[indexPath.row].name
-        let url = URL(string: mainService.characters[indexPath.row].thumbnail.path + "/standard_fantastic.jpg")!
-        getImageWithURL(url) { data in
-            DispatchQueue.main.async {
-                cell.charImageView.image = UIImage(data: data)
-            }
-            
+        let url = URL(string: dataSource[indexPath.row].thumbnail.path + "/standard_fantastic.jpg")
+        if let url = url {
+            cell.configureCell(superHeroName: dataSource[indexPath.row].name, superHeroImage: url)
         }
         return cell
-    }
-    
-    func getImageWithURL(_ url: URL, completion: @escaping ((Data)-> Void)) {
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                print(error)
-            }
-
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
-                return
-            }
-
-            if let data = data {
-                completion(data)
-            }
-        }
-        task.resume()
     }
 }

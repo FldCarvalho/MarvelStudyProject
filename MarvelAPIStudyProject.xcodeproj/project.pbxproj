@@ -66,7 +66,7 @@
 		869579A42768D8DE00F8DADC /* MarvelAPIStudyProject */ = {
 			isa = PBXGroup;
 			children = (
-				869579D62768E8FC00F8DADC /* MainScrenn */,
+				869579D62768E8FC00F8DADC /* MainScreen */,
 				869579D12768DFB600F8DADC /* Extensions */,
 				869579A52768D8DE00F8DADC /* AppDelegate.swift */,
 				869579A72768D8DE00F8DADC /* SceneDelegate.swift */,
@@ -80,7 +80,7 @@
 		869579BA2768D92400F8DADC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				869579C32768DA1D00F8DADC /* APIService.swift */,
+				869579A92768D8DE00F8DADC /* ViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -104,7 +104,7 @@
 		869579BD2768D94C00F8DADC /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				869579A92768D8DE00F8DADC /* ViewController.swift */,
+				869579C32768DA1D00F8DADC /* APIService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -126,7 +126,7 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		869579D62768E8FC00F8DADC /* MainScrenn */ = {
+		869579D62768E8FC00F8DADC /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
 				869579BB2768D93000F8DADC /* View */,
@@ -135,7 +135,7 @@
 				869579BC2768D94600F8DADC /* Model */,
 				869579CA2768DB3400F8DADC /* Cell */,
 			);
-			path = MainScrenn;
+			path = MainScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

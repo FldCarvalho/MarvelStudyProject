@@ -41,6 +41,33 @@ class CharactersTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: true)
     }
     
+    func configureCell(superHeroName: String, superHeroImage url: URL) {
+        charLabelView.text = superHeroName
+        getImageWithURL(url) { data in
+            DispatchQueue.main.async {
+                self.charImageView.image = UIImage(data: data)
+            }
+        }
+    }
+    
+    func getImageWithURL(_ url: URL, completion: @escaping ((Data)-> Void)) {
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                print(error)
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                return
+            }
+            
+            if let data = data {
+                completion(data)
+            }
+        }
+        task.resume()
+    }
+    
     private func setImageConstraints() {
         let constraint = [
             charImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -62,4 +89,5 @@ class CharactersTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate(constraint)
     }
+    
 }
